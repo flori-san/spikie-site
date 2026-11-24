@@ -1,0 +1,132 @@
+/* Spikie website. Colours and shapes follow the app's "Soft & Friendly" tokens (docs/spec.md). Light only, like
+   the app. No web fonts except the pixel wordmark, which is served from here (never from Google, so no visitor
+   data leaves the site). */
+
+@font-face {
+  font-family: "Pixelify Sans";
+  src: url("/assets/PixelifySans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  --bg: #FAF7F2;
+  --card: #FFFFFF;
+  --text: #1F2937;
+  --text-2: #6B7280;
+  --border: #ECE6DC;
+  --primary: #E07A5F;
+  --button: #B8553A;
+  --peach: #FBE3D0;
+  --success: #2E7D5B;
+  --success-tint: #DDEFE6;
+  --warning: #FBBF24;
+  --radius: 20px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 17px/1.6 var(--font);
+}
+
+a { color: var(--button); text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 8px; background: var(--card); padding: 8px 12px; z-index: 10; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+/* Header */
+.site-header { border-bottom: 1px solid var(--border); background: var(--bg); }
+.site-header .wrap { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); margin-right: auto; }
+.brand img { width: 36px; height: 36px; border-radius: 9px; image-rendering: pixelated; }
+.brand span { font: 600 24px/1 "Pixelify Sans", var(--font); }
+.site-header nav { display: flex; gap: 4px 16px; flex-wrap: wrap; font-size: 15px; font-weight: 600; }
+.site-header nav a { text-decoration: none; }
+.site-header nav a[aria-current="page"] { color: var(--text); }
+
+/* Draft banner: removed before launch (scripts/check-site.py --release fails while it's there) */
+.draft { background: var(--warning); color: #3B2A00; font-size: 14px; font-weight: 600; text-align: center; padding: 8px 16px; }
+
+main.wrap { padding-top: 32px; padding-bottom: 48px; }
+h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
+h2 { font-size: 22px; line-height: 1.3; margin: 40px 0 8px; }
+h3 { font-size: 18px; margin: 24px 0 4px; }
+p, ul, ol { margin: 0 0 14px; }
+li { margin-bottom: 6px; }
+.lead { font-size: 19px; color: var(--text-2); }
+.meta { font-size: 14px; color: var(--text-2); }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin: 20px 0; box-shadow: 0 2px 10px rgba(31, 41, 55, 0.04); }
+.card > :last-child { margin-bottom: 0; }
+.card h2.first { margin-top: 0; }
+.card.tint { background: var(--peach); border-color: transparent; }
+.card.ok { background: var(--success-tint); border-color: transparent; }
+
+.button { display: inline-block; background: var(--button); color: #fff; font-weight: 600; text-decoration: none; border-radius: 999px; padding: 12px 22px; }
+.button:hover { background: #9E4630; }
+
+table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 0 0 16px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+th { font-weight: 600; background: #F4EFE7; }
+.table-scroll { overflow-x: auto; }
+
+/* Home */
+.hero { display: flex; gap: 24px; align-items: center; }
+.hero img { width: 120px; height: 120px; border-radius: 28px; image-rendering: pixelated; flex: none; }
+.steps { counter-reset: step; list-style: none; padding: 0; }
+.steps li { counter-increment: step; position: relative; padding-left: 44px; margin-bottom: 14px; }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--peach); color: var(--button); font-weight: 700; text-align: center; line-height: 30px; }
+
+/* Legal documents */
+.toc { font-size: 15px; }
+.toc ol { padding-left: 22px; margin: 0; }
+.legal-doc h2 { scroll-margin-top: 16px; }
+.legal-doc ol ol { list-style: lower-alpha; }
+
+/* Questions */
+details { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px 18px; margin: 10px 0; }
+details > summary { font-weight: 600; cursor: pointer; }
+details[open] > summary { margin-bottom: 8px; }
+
+/* Notes for the lawyer (Polish pages only, removed before launch) */
+.lawyer { border-left: 4px solid #C2410C; background: #FFF4E5; border-radius: 0 12px 12px 0; padding: 10px 14px; margin: 12px 0; font-size: 14px; line-height: 1.5; }
+.lawyer::before { content: "⚖ Do weryfikacji prawnika"; display: block; font-weight: 700; color: #9A3412; }
+.lawyer[data-level="high"] { border-left-color: #B91C1C; background: #FDECEC; }
+.lawyer[data-level="high"]::before { content: "⚖ Do weryfikacji prawnika: pilne"; color: #991B1B; }
+.lawyer > :last-child { margin-bottom: 0; }
+
+/* Missing facts, filled in before launch */
+mark.todo { background: #FDE68A; color: #3B2A00; padding: 0 4px; border-radius: 4px; font-weight: 600; }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--border); padding: 28px 0 40px; font-size: 14px; color: var(--text-2); }
+.site-footer .links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 14px; font-weight: 600; }
+.site-footer address { font-style: normal; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  h1 { font-size: 28px; }
+  .hero { flex-direction: column; align-items: flex-start; }
+  .hero img { width: 88px; height: 88px; border-radius: 22px; }
+  th, td { padding: 6px; }
+}
+
+@media print {
+  .site-header nav, .skip, .site-footer .links { display: none; }
+  body { background: #fff; font-size: 11pt; }
+  .card, details { box-shadow: none; break-inside: avoid; }
+  details { border: none; padding: 0; }
+  a[href^="http"]::after, a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }
+}
